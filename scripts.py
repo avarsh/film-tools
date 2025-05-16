@@ -31,7 +31,7 @@ def get_average_extremeness_for_user(browser, user, save_user=False, cap=None):
 
     for movie in movies_to_review:
         if movie[0] not in db:
-            mu, sigma, ratings =  get_movie_stats(browser, movie[0])
+            mu, sigma, ratings =  scraper.get_movie_stats(browser, movie[0])
             db[movie[0]] = ratings
             
 

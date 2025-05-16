@@ -9,6 +9,8 @@ from selenium.webdriver.common.by import By
 
 import time
 from os import path
+import stats
+import math
 
 # Global constants
 STAR_CHR = "★"
@@ -107,10 +109,10 @@ def get_movie_stats(browser, link):
             ratings.append(0)
         else:
             ratings.append(int(first_word.replace(",", "")))
-    with open('movie-db.csv', 'a') as f:
+    with open('data/movie-db.csv', 'a') as f:
         f.write(link + ", " + str(ratings) + "\n")
 
-    average, variance = compute_stats(ratings)
+    average, variance = stats.compute_stats(ratings)
 
     std_dev = math.sqrt(variance)
 
@@ -126,7 +128,7 @@ def create_browser():
 
 
 def get_user_reviews(user):
-    user_data_file = f"users/{user}.csv"
+    user_data_file = f"data/users/{user}.csv"
 
     if path.isfile(user_data_file):
         with open(user_data_file, 'r') as f:
